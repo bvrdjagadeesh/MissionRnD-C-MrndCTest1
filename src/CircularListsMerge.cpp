@@ -45,6 +45,10 @@ int merge_circularlists(struct node **head1, struct node **head2){
 int len(struct node **head1)
 {
 	int i = 0;
+	if ((*head1) == NULL)
+	{
+		return 0;
+	}
 	struct node *temp = (*head1);
 	while (temp->next != (*head1))
 	{
