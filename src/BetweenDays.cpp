@@ -28,7 +28,61 @@ struct node{
 	struct node *next;
 };
 
-
+int getday(struct node *);
+int getmonth(struct node *);
+int getyear(struct node *);
 int between_days(struct node *date1head, struct node *date2head){
-	return -1;
+	if (date1head==NULL||date2head==NULL)
+		return -1;
+	int day1 = getday(date1head);
+	int day2 = getday(date2head);
+	int month1 = getmonth(date1head);
+	int month2 = getmonth(date2head);
+	int year1 = getyear(date1head);
+	int year2 = getyear(date2head);
+	int day = day2 - day1;
+	int month = month2 - month1;
+	int year = year2 - year1;
+	return (day + month * 31 + year * 365)-1;
+}
+int getmonth(struct node *datehead)
+{
+	int i = 0;
+	int month = 0;
+	for (i = 0; datehead->next != NULL; i++)
+	{
+		if (i >= 2 && i<4)
+		{
+			month = month * 10 + datehead->data;
+		}
+		datehead = datehead->next;
+	}
+	return month;
+}
+int getday(struct node *datehead)
+{
+	int i = 0;
+	int day=0;
+	for (i = 0; i < 2; i++)
+	{
+		day =day*10+ datehead->data;
+		datehead = datehead->next;
+	}
+	return day;
+}
+
+int getyear(struct node *datehead)
+{
+	int i;
+	int year = 0;
+	for (i = 0;datehead->next!=NULL; i++)
+	{
+		if (i >= 4)
+		{
+			year = year * 10 + datehead->data;
+		}
+		datehead = datehead->next;
+	}
+	year = year * 10 + datehead->data;
+	return year;
 }
